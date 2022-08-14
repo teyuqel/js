@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myDiv {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <p>Click the button to display an alert box.</p>
+    <button onclick=" notify()">Try it</button>
+    <script>
+        function notify() {
+            /* Nhập thông tin */
+            alert("Chào mừng bạn đến với ứng dụng JavaScript đầu tiên");
+            var name=prompt("Hãy nhập tên của bạn")
+            var city=prompt("Hãy nhập thành phố bạn đang sống")
+            var phone=prompt("Hãy nhập số điện thoại của bạn")
+            var age=prompt("Hãy nhập năm sinh:")
+            /* Kiểm tra năm sinh */
+            while ( age > 2021){
+                age=prompt("Hãy nhập lại năm sinh: ")
+            }
+            var email=prompt("Hãy nhập email của bạn")
+            var job=prompt("Hãy nhập nghề nghiệp của bạn")
+            /* Gọi hàm tính tuổi */
+            var age1 = yourAge(age)
+            var x = document.getElementById('myDiv')
+            document.getElementById("yourAge").innerHTML = "Tuổi của bạn : " +  age1;
+            document.getElementById('name').innerHTML = "Tên của bạn : " + name;
+            document.getElementById('city').innerHTML = "Thành phố bạn đang sống : " + city;
+            document.getElementById('phone').innerHTML = "Số điện thoại của bạn : " + phone;
+            document.getElementById('age').innerHTML = "Năm sinh của bạn : " + age;
+            document.getElementById('email').innerHTML = "Email của bạn : " + email;
+            document.getElementById('job').innerHTML = "Nghề nghiệp của bạn : " + job;
+            /* Thay đổi gt thuộc tính của thẻ div */
+            var x = document.getElementById('myDiv')
+            x.style.display = "block";
+        }
+        /* Hàm tính tuổi */
+        function yourAge(age) {
+            return 2021- age
+        }
+    </script>
+    <p id="name" style="font-weight:bold"></p>
+    <p id="city" style="font-weight:bold"></p>
+    <p id="phone" style="font-weight:bold"></p>
+    <p id="age" style="font-weight:bold"></p>
+    <p id="yourAge" style="font-weight:bold"></p>
+    <p id="email" style="font-weight: bold;"></p>
+    <p id="job" style="font-weight: bold;"></p>
+    <div id="myDiv">
+        <button >Bước tiếp theo</button>
+    </div>
+</body>
+</html>

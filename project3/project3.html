@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="project3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" type="text/javascript"></script>
+  <title>Pj3</title>
+  <style>
+    label.error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center;">Class Marksheet</h1>
+  <div id="form">
+    <form action="" id="form1" method="get">
+      <p>
+        <label for="hoten">Họ tên : </label>
+        <input type="text" name="hoten1" id="hoten"><br><br>
+      </p>
+      <p>
+        <label for="math">Điểm toán : </label>
+        <input type="text" name="math1" id="math"><br><br>
+      </p>
+      <p>
+        <label for="vatly">Điểm vật lý : </label>
+        <input type="text" name="vatly1" id="vatly"><br><br>
+      </p>
+      <p>
+        <label for="hoahoc">Điểm hoá : </label>
+        <input type="text" name="hoahoc1" id="hoahoc"><br><br>
+      </p>
+      <div id="input">
+        <button id="inputData">Nhập</button><br><br>
+      </div><br>
+    </form>
+  </div>
+  <div id="table0">
+    <table border="1" id="myTable">
+      <tr>
+        <th>STT</th>
+        <th>Họ tên</th>
+        <th>Toán</th>
+        <th>Lý</th>
+        <th>Hoá</th>
+        <th>Trung bình</th>
+      </tr>
+    </table>
+  </div><br>
+  <div id="zz">
+    <button id="tinhdiemTb">Tính điểm trung bình</button>
+  </div><br>
+  <div id="zzz">
+    <button id="xacdinhHSG">Xác định học sinh giỏi</button>
+    <button id="xacdinhHSK">Xác định học sinh khá</button>
+    <button id="xacdinhHSY">Xác định học sinh yếu</button>
+  </div>
+  <script>
+    $(document).ready(function(){
+      var i = 1
+      $("#inputData").click(function(){
+        $("#form1").validate({
+          rules: {
+            hoten1: {
+              required: true,
+            },
+            math1: {
+              required: true,
+              number: true,
+            },
+            vatly1: {
+              required: true,
+              number: true,
+            },
+            hoahoc1: {
+              required: true,
+              number: true,
+            }
+          },
+          messages: {
+            hoten1: {
+              required: "     Bắt buộc nhập họ tên",
+            },
+            math1: {
+              required: "     Bắt buộc nhập điểm toán",
+              number: "      Phải là số"
+            },
+            vatly1: {
+              required: "     Bắt buộc nhập điểm vật lý",
+              number: "      Phải là số"
+            },
+            hoahoc1: {
+              required: "     Bắt buộc nhập điểm hoá học",
+              number: "      Phải là số"
+            },
+          }
+        })
+        var name = $("#hoten").val()
+        var math = $("#math").val()
+        var vatly = $("#vatly").val()
+        var hoahoc = $("#hoahoc").val()
+        if(name != "" && math != "" && vatly != "" && hoahoc != ""){
+          $("#hoten").val("")
+          $("#math").val("")
+          $("#vatly").val("")
+          $("#hoahoc").val("")
+          $("#myTable").append(
+            "<tr><td>" + i++ + "</td>"
+            + "<td>" + name + "</td>"
+            + "<td>" + math + "</td>"
+            + "<td>" + vatly + "</td>"
+            + "<td>" + hoahoc + "</td>"
+            + "<td>" + "?" + "</td></tr>"
+          )
+        }
+      })
+      $("#tinhdiemTb").click(function(){
+        $("tr").each(function(){
+          var math = $(this).children("td").eq(2).html()
+          var vatly = $(this).children("td").eq(3).html()
+          var hoahoc = $(this).children("td").eq(4).html()
+          var diemTb = parseFloat(math) + parseFloat(vatly) + parseFloat(hoahoc)
+          $(this).children("td").eq(5).html((diemTb/3).toFixed(1))
+        })
+      })
+      $("#xacdinhHSG").click(function(){
+        $("tr").each(function(){
+          var diemtb = $(this).children("td").eq(5).html()
+          if( diemtb >= 8){
+            $(this).css({'color':'red'})
+          }
+        })
+      })
+      $("#xacdinhHSK").click(function() {
+        $("tr").each(function () {
+          var diemtb = $(this).children("td").eq(5).html()
+          if (diemtb <8 && diemtb >6) {
+            $(this).css({ 'color': 'blue' })
+          }
+        })
+      })
+      $("#xacdinhHSY").click(function() {
+        $("tr").each(function () {
+          var diemtb = $(this).children("td").eq(5).html()
+          if (diemtb <= 6) {
+            $(this).css({ 'color': 'green' })
+          }
+        })
+      })
+    })
+  </script>
+</body>
+</html>

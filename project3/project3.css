@@ -1,0 +1,38 @@
+#form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#table0 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#table0 table td {
+  width: 100px;
+  text-align: center;
+}
+#table0 table th {
+  width: 200px;
+}
+#zz {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#zzz {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media only screen and (max-width: 500px) {
+  #zzz {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+}

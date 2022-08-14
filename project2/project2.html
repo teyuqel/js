@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pj2</title>
+  <link rel="stylesheet" href="project2.css">
+</head>
+
+<body>
+  <h1 style="text-align: center;">Class Marksheet</h1>
+  <div id="form">
+    <form action="" >
+      <label for="hoten">Họ tên</label>
+      <input type="text" name="hoten" id="hoten"><br><br>
+      <label for="math">Điểm toán</label>
+      <input type="text" name="math" id="math"><br><br>
+      <label for="vatly">Điểm lý</label>
+      <input type="text" name="vatly" id="vatly"><br><br>
+      <label for="hoahoc">Điểm hoá</label>
+      <input type="text" name="hoahoc" id="hoahoc"><br><br>
+    </form>
+  </div>
+  <div id="input">
+    <button onclick="inputData()" >Nhập</button><br><br>
+  </div><br>
+  <div id="table0">
+    <table border="1" id="myTable">
+      <tr>
+        <th>STT</th>
+        <th>Họ tên</th>
+        <th>Toán</th>
+        <th>Lý</th>
+        <th>Hoá</th>
+        <th>Trung bình</th>
+      </tr>
+    </table>
+  </div><br>
+  <div id="zz">
+    <button onclick="diemtrungbinh()" >Tính điểm trung bình</button>
+  </div><br>
+  <div id="zzz">
+    <button onclick="xacdinhHSG()">Xác định học sinh giỏi</button>
+    <button onclick="xacdinhHSTT()">Xác định học sinh tiên tiến</button>
+    <button onclick="xacdinhHSY()">Xác định học sinh yếu</button>
+  </div>
+  <script>
+    var table = document.getElementById("myTable")
+    var testScore = {
+      name: "",
+      math: 0,
+      physical: 0,
+      chemistry: 0,
+    }
+    var i = 1
+    function inputData() {
+      testScore.name = document.getElementById("hoten").value
+      testScore.math = document.getElementById("math").value
+      testScore.vatly = document.getElementById("vatly").value
+      testScore.hoahoc = document.getElementById("hoahoc").value
+      document.getElementById("hoten").value = ""
+      document.getElementById("math").value = ""
+      document.getElementById("hoahoc").value = ""
+      document.getElementById("vatly").value = ""
+      var row = table.insertRow(i)
+      var cell0 = row.insertCell(0)
+      var cell1 = row.insertCell(1)
+      var cell2 = row.insertCell(2)
+      var cell3 = row.insertCell(3)
+      var cell4 = row.insertCell(4)
+      var cell5 = row.insertCell(5)
+      cell0.innerHTML = i++
+      cell1.innerHTML = testScore.name
+      cell2.innerHTML = testScore.math
+      cell3.innerHTML = testScore.vatly
+      cell4.innerHTML = testScore.hoahoc
+      cell5.innerHTML = "?"
+    }
+    var diemtb = []
+    function diemtrungbinh() {
+      diemtb = []
+      for(var i = 1, row; row =table.rows[i];i++){
+        var x = 0;
+        for(var j = 2; j <= 4;j++){
+          x  += Number(row.cells[j].textContent)
+        }
+        diemtb.push((x/3).toFixed(1))
+      }
+      var rows = document.querySelectorAll('#myTable > tbody > tr > td:nth-child(6)')
+      for (var i = 0; i < diemtb.length; i++) {
+        rows[i].innerHTML = diemtb[i]
+      }
+    }
+    function xacdinhHSG() {
+        for (var i = 1, row; row = table.rows[i]; i++) {
+          if (diemtb[i-1] >= 8) {
+            row.style.background = "red"
+          }
+        }
+    }
+    function xacdinhHSTT(){
+      for (var i = 1, row; row = table.rows[i]; i++) {
+        if ( diemtb[i - 1] < 8 && diemtb[i-1] > 6) {
+          row.style.background = "blue"
+        }
+      }
+    }
+    function xacdinhHSY() {
+        for (var i = 1, row; row = table.rows[i]; i++) {
+          if ( diemtb[i - 1] <= 6) {
+            row.style.background = "yellow"
+          }
+        }
+      }
+  </script>
+
+</body>
+
+</html>
